@@ -131,6 +131,7 @@ void LCD_Clear(void)
 {
 	LCD_WriteCommand(0x01);
 }
+/*
 void LCD_WriteInteger(sint32 num)
 {
 	DIO_WritePin(LCD_4BIT_CMD_PORT ,LCD_RS_PIN, DIO_PIN_HIGH);
@@ -160,4 +161,18 @@ void LCD_WriteInteger(sint32 num)
 		_delay_ms(5);
 		num = num / 10;
 	      
+}
+*/
+
+
+// USING STDLIB.h :
+
+void LCD_WriteInteger(sint32 *num)
+{
+	char buffer [5];
+
+	
+	itoa(*num,buffer,10);
+	LCD_WriteString(buffer);
+	
 }
