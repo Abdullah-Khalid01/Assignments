@@ -20,5 +20,6 @@ void UART_SendString(uint8 *str);
 
 char UART_RecieveByte(void);
 
+void UART_RecieveString(void);
 
 #endif /* UART_H_ */

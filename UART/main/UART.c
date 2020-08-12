@@ -8,7 +8,7 @@
 
 #include "UART.h"
 
-
+uint8 RX_Data =0;
 
 void UART_INIT(void)
 {
@@ -52,4 +52,38 @@ char UART_RecieveByte(void)
 	
 	return data;
 	
+}
+
+void UART_RecieveString(void)
+{
+	SREG |= 0x80;
+	
+	UCSRB |=0x80;
+	
+		RX_Data = UART_RecieveByte();
+	
+}
+
+ISR(USART_RXC_vect)
+{
+	static char DATA[] ={0};
+		static sint8 i =0;
+		if (RX_Data == ' ')
+		{
+			DATA[i]=RX_Data;
+			LCD_WriteString(DATA);
+			while(i > -1)
+			{
+				DATA[i]=0;
+				i--;
+			}
+			
+			i=0;
+		}
+		else
+		{
+			DATA[i]=RX_Data;
+			i++;
+		}
+		
 }
