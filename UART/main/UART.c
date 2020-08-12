@@ -28,9 +28,10 @@ void UART_INIT(void)
 void UART_SenfByte(uint8 data)
 
 {
+	UDR =data;
+	
 	while(Get_bit(UCSRA,5) == 0 );
 	
-	UDR =data;
 }
 
 void UART_SendString(uint8 *str)
@@ -78,7 +79,7 @@ ISR(USART_RXC_vect)
 				i--;
 			}
 			
-			i=0;
+			
 		}
 		else
 		{
